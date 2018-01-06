@@ -1,10 +1,29 @@
 # Github Discover
 
-Simple social media build with Github API + Nuxt.JS
+![Preview](./static/preview.png)
 
-> Nuxt.js + Vuetify.js project
+> Powered by Nuxt.js + Vuetify.js project
 
-## Build Setup
+### Hi there, welcome to Github Discover
+
+Before we started, basicly this project just for learn about _How to build apps using Nuxt.JS_ and then i use Github API for the web services.
+
+So if you want to help me to build this project together, you can follow below steps :
+
+## Documentations
+
+#### Prerequisite
+
+Make sure you're already installing NodeJS on your computer
+
+#### Installing project
+
+1. Fork this project
+2. Clone this project on your account
+
+* Don't forget to star :p
+
+#### Build Setup
 
 ``` bash
 # install dependencies
@@ -19,3 +38,11 @@ $ npm start
 ```
 
 For detailed explanation on how things work, check out the [Nuxt.js](https://github.com/nuxt/nuxt.js) and [Vuetify.js](https://vuetifyjs.com/) documentation.
+
+### Note
+
+Currently i use FREE Github API (using https://api.github.com) so is limited access.
+
+## License
+
+This project under MIT License
