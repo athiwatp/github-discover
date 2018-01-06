@@ -9,8 +9,19 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  middleware: 'auth'
+  middleware: 'auth',
+  mounted () {
+    this.getFeeds()
+  },
+  methods: {
+    getFeeds () {
+      axios.get('https://api.github.com/users/muhibbudins/gists').then((data) => {
+        console.log(data)
+      })
+    }
+  }
 }
 </script>
-

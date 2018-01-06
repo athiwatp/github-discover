@@ -24,9 +24,9 @@
               v-model="password"
               :rules="passwordRules"
               min="8"
-              :append-icon="visible ? 'visibility' : 'visibility_off'"
-              :append-icon-cb="() => (visible = !visible)"
-              :type="visible ? 'password' : 'text'"
+              :append-icon="!invisible ? 'visibility' : 'visibility_off'"
+              :append-icon-cb="() => (invisible = !invisible)"
+              :type="invisible ? 'password' : 'text'"
               :counter="10"
               required
             ></v-text-field>
@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       valid: true,
-      visible: false,
+      invisible: true,
       username: '',
       usernameRules: [
         (v) => (!!v) || 'Username is required',
@@ -77,9 +77,6 @@ export default {
           username: this.username,
           password: this.password
         }).then(() => {
-          this.username = ''
-          this.password = ''
-          this.formError = null
           this.$router.replace({ path: '/feeds' })
         }).catch((e) => {
           this.formError = e.message

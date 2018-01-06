@@ -9,12 +9,17 @@ const port = process.env.PORT || '3000'
 // Body parser, to access req.body
 app.use(bodyParser.json())
 
+const oneWeek = 3600000 * 24 * 7
+
 // Sessions to create req.session
 app.use(session({
   secret: 'loremipsum',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: {
+    expires: new Date(Date.now() + oneWeek),
+    maxAge: oneWeek
+  }
 }))
 
 // POST /api/login to log in the user and add him to the req.session.authUser
