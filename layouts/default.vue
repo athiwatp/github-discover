@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer
+      v-if="$store.state.authUser"
       :mini-variant="miniVariant"
       :clipped="clipped"
       v-model="drawer"
@@ -24,10 +25,13 @@
         </v-list-tile>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar fixed app :clipped-left="clipped">
+    <v-toolbar v-if="$store.state.authUser" fixed app :clipped-left="clipped" dark color="primary">
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+        <v-btn flat @click="logout">Sign Out</v-btn>
+      </v-toolbar-items>
     </v-toolbar>
     <v-content>
       <v-container>
@@ -54,6 +58,13 @@
         ],
         miniVariant: false,
         title: 'Github Discover'
+      }
+    },
+    methods: {
+      logout () {
+        this.$store.dispatch('logout').then(
+          () => this.$router.replace({ path: '/' })
+        )
       }
     }
   }
