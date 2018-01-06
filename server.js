@@ -2,6 +2,7 @@ const { Nuxt, Builder } = require('nuxt')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const app = require('express')()
+const axios = require('axios')
 
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || '3000'
@@ -24,11 +25,26 @@ app.use(session({
 
 // POST /api/login to log in the user and add him to the req.session.authUser
 app.post('/api/login', function (req, res) {
-  if (req.body.username === 'test' && req.body.password === 'test') {
-    req.session.authUser = { username: 'test' }
-    return res.json({ username: 'test' })
+  if (req.body.username) {
+    axios.get('https://api.github.com/users/' + req.body.username).then(function (response) {
+      if (response.data && typeof response.data.login !== 'undefined') {
+        req.session.authUser = response.data
+        return res.status(201).json(response.data)
+      } else {
+        return res.status(404).json({
+          status: 404,
+          message: 'Username not found'
+        })
+      }
+    }).catch((e) => {
+      return res.status(404).json({
+        status: 404,
+        message: 'Username not found'
+      })
+    })
+  } else {
+    return res.status(401).json({ message: 'Bad credentials' })
   }
-  res.status(401).json({ message: 'Bad credentials' })
 })
 
 // POST /api/logout to log out the user and remove it from the req.session

@@ -11,23 +11,9 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
-              label="Username"
+              label="Github Username"
               v-model="username"
               :rules="usernameRules"
-              :counter="10"
-              required
-            ></v-text-field>
-            <v-text-field
-              name="input-10-1"
-              label="Password"
-              hint="At least 6 characters"
-              v-model="password"
-              :rules="passwordRules"
-              min="8"
-              :append-icon="!invisible ? 'visibility' : 'visibility_off'"
-              :append-icon-cb="() => (invisible = !invisible)"
-              :type="invisible ? 'password' : 'text'"
-              :counter="10"
               required
             ></v-text-field>
             <v-btn
@@ -46,6 +32,9 @@
             </v-btn>
           </v-card-text>
         </v-card>
+        <v-alert v-if="formError" color="error" icon="warning" value="true">
+          {{ formError }}
+        </v-alert>
       </v-form>
     </v-flex>
   </v-layout>
@@ -59,13 +48,8 @@ export default {
       invisible: true,
       username: '',
       usernameRules: [
-        (v) => (!!v) || 'Username is required',
-        (v) => (v && v.length <= 4) || 'Username must be less than 4 characters'
-      ],
-      password: '',
-      passwordRules: [
-        (v) => (!!v) || 'Passowrd is required',
-        (v) => (v && v.length <= 6) || 'Passowrd must be less than 6 characters'
+        (v) => (!!v) || 'Github Username',
+        (v) => (v && v.length >= 3) || 'Username must be more than 3 characters'
       ],
       formError: null
     }
@@ -74,16 +58,17 @@ export default {
     login () {
       if (this.$refs.form.validate()) {
         this.$store.dispatch('login', {
-          username: this.username,
-          password: this.password
+          username: this.username
         }).then(() => {
           this.$router.replace({ path: '/feeds' })
         }).catch((e) => {
+          console.log(e.message)
           this.formError = e.message
         })
       }
     },
     clear () {
+      this.formError = null
       this.$refs.form.reset()
     }
   }

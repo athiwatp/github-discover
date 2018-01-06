@@ -14,9 +14,7 @@ const action = {
     }).then((res) => {
       commit('SET_USER', res.data, { root: true })
     }).catch((error) => {
-      if (error.response.status === 401) {
-        throw new Error('Bad credentials')
-      }
+      throw new Error(error)
     })
   },
 
