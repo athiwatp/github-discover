@@ -1,3 +1,7 @@
+# Assets Cache
+.DS_Store
+static/.DS_Store
+
 # Nuxt Build
 .nuxt
 
