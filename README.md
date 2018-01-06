@@ -10,8 +10,6 @@ Before we started, basicly this project just for learn about _How to build apps 
 
 So if you want to help me to build this project together, you can follow below steps :
 
-## Documentations
-
 #### Prerequisite
 
 Make sure you're already installing NodeJS on your computer
@@ -43,6 +41,6 @@ For detailed explanation on how things work, check out the [Nuxt.js](https://git
 
 Currently i use FREE Github API (using https://api.github.com) so is limited access.
 
-## License
+### License
 
 This project under MIT License
