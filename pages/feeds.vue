@@ -46,7 +46,7 @@ export default {
       axios.get(user.followers_url).then(result => {
         result.data.map(item => {
           // Get followers gists
-          axios.get(item.gists_url).then((res) => {
+          axios.get(`https://api.github.com/users/${item.login}/gists`).then((res) => {
             res.data.map(item => {
               this.listFeed.push({
                 avatar: item.avatar_url,
